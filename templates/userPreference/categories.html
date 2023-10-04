@@ -1,0 +1,54 @@
+{% extends 'partiels/base.html' %}
+{% load static %}
+{% block content %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="row">
+                        <div class="col md-8">
+                            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                <h1 class="h3 mb-0 text-gray-800">Categories</h1>
+                            </div>
+                       </div>
+                       <div class="col-md-2"></div>
+                        <div class="col md-2"> 
+                            <a href="{%url 'add-category'%}" class="btn btn-primary">Add Category</a>
+                        </div>
+                    </div>
+        </div>
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+
+        </div>
+            <div class="card-body" id="table1">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>category</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for category in categories %}
+                            <tr>
+                                <td>{{category.name}}</td>
+                                <td>
+                                    <span> <a href="{% url 'delete-category' category.id %}"><i class="fas fa-trash" style="color: red;"> </i></a></span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+  
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+                <div id="no-result"></div>
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+{% endblock %}

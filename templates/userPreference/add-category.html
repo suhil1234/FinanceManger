@@ -1,0 +1,42 @@
+{% extends 'partiels/base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+        <div class="col md-10">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Add Category</h1>
+            </div>
+        </div>
+</div>
+<div class="container">
+
+
+        <div class="card-body">
+            <!-- Nested Row within Card Body -->
+                <div class="col-lg-7">
+                    {% include 'partiels/messages.html' %}
+                        <form id="myForm" class="user" method="POST" action="{% url 'add-category' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="name">name</label>
+                                <input type="text" 
+                                class="form-control"
+                                name="name" 
+                                id="name"
+                                placeholder="name">
+                            </div>
+
+                            <input type="submit" value="Add Category" id="add-category" 
+                            class="btn btn-primary"> 
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+
+{% endblock  %}

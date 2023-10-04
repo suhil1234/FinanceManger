@@ -1,0 +1,35 @@
+{% extends 'partiels/base.html' %}
+{% block content %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">User's Preference</h1>
+                    </div>
+                    {% include 'partiels/messages.html' %}
+                    <form action="{%url 'userpreference'%}" method="post">
+                        {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <select name="currency" class="form-control">
+                                {% if current  %}
+                                <option  selected="true" value="{{current}}" >{{current}}</option>
+                                {% else %}
+                                <option selected="true" >Choose....</option>
+                                {% endif %}
+                                {% for k, v in data.items %}
+                                    <option  value="{{ k }} - {{ v }}">{{ k }} - {{ v }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <input type="submit" value="Choose" id="choose-button" class="btn btn-primary">
+                        </div>
+                    </div>
+                </form>      
+
+        </div>
+        <!-- End of Content Wrapper -->
+{% endblock %}

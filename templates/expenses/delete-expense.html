@@ -1,0 +1,44 @@
+{% extends 'partiels/base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+        <div class="col md-10">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <div class="alert alert-danger">Do you really want to delete this expense ?</div>
+            </div>
+        </div>
+</div>
+<div class="container">
+
+
+        <div class="card-body">
+            <!-- Nested Row within Card Body -->
+                <div class="col-lg-7">
+                    {% include 'partiels/messages.html' %}
+                        <form id="myForm" class="user" method="POST" action="{% url 'delete-expense' pk%}">
+                            {% csrf_token %}
+                            <div class="row">
+                               <div class="col md-3">
+                                <input type="submit" value="Delete" id="delete-expense" 
+                                class="btn btn-danger">
+                               </div>
+                               <div class="col md-3">
+                                <a href="{%url 'index'%}" class="btn btn-primary">Cancel</a>
+                               </div>
+                               <div class="col md-6">
+                              
+                               </div>
+                            </div>
+                                
+                        </form>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+
+{% endblock  %}

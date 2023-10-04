@@ -1,0 +1,131 @@
+{% extends 'partiels/base.html' %}
+{% load static %}
+{% block content %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="row">
+                        <div class="col md-8">
+                            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                <h1 class="h3 mb-0 text-gray-800">Expenses</h1>
+                            </div>
+                       </div>
+                       <div class="col-md-2"></div>
+                        <div class="col md-2"> 
+                            <a href="{%url 'add-expense'%}" class="btn btn-primary">Add Expense</a>
+                            <a href="{%url 'export_to_pdf'%}" class="btn btn-secondary">Export PDF</a>
+                        </div>
+                    </div>
+        </div>
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+            <div class="row">
+                <div class="col ">
+                    
+                        <h6 class="m-0 font-weight-bold text-primary">Expenses Table</h6>
+                   
+                </div>
+                <div class="col"></div>
+                <div class="col">
+                    <form
+                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <div class="input-group">
+                        <input type="text" 
+                        class="form-control bg-light border-0 small" 
+                        placeholder="Search for..."
+                        aria-label="Search" 
+                        aria-describedby="basic-addon2"
+                        id="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+            <div class="card-body" id="table1">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>amount ({{currency}})</th>
+                                <th>description</th>
+                                <th>category</th>
+                                <th>date</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for expense in page_obj %}
+                            <tr>
+                                <td>{{expense.amount}}</td>
+                                <td> {{expense.description}}</td>
+                                <td>{{expense.category}}</td>
+                                <td>{{expense.date}}</td>
+                                <td>
+                                    <span><a href="{% url 'edit-expense' expense.id %}"><i class="fas fa-edit" style="color: darkgreen;" >  </i></a></span>
+                                    </td>
+                                    
+                                        <td>
+                                        <span> <a href="{% url 'delete-expense' expense.id %}"><i class="fas fa-trash" style="color: red;"> </i></a></span>
+                                    
+                                </td>
+                            </tr>
+                            {% endfor %}
+  
+                        </tbody>
+                    </table>
+                    <div class="container container-pagination">
+                        <span class="current">
+                                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                                </span>
+                        <ul class="pagination align-right float-right mr-auto">
+                                {% if page_obj.has_previous %}
+                                    <li {% if page_obj.number == 1 %}  class="page-item active" {% endif %}><a  class="page-link" href="?page=1">&laquo; 1</a></li>
+                                   <li class="page-item">  <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                                {% endif %}
+                        
+                                {% if page_obj.has_next %}
+                                  <li class="page-item">   <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                                   <li class="page-item">    <a   class="page-link" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages}} &raquo;</a></li>
+                                {% endif %}
+                        
+                        
+                        </ul>
+                        
+                        </div>
+                </div>
+                </div>
+                <div id="no-result"></div>
+                <div class="card-body" id="table2">
+                    <div class="table-responsive">
+                       
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>amount ({{currency}})</th>
+                                    <th>description</th>
+                                    <th>category</th>
+                                    <th>date</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+    
+                            <tbody id="result-rows">
+                            </tbody>
+                        </table>
+                      
+                    </div>
+            </div>
+        </div>
+        <!-- End of Content Wrapper -->
+        <script src="{%static '/js/search.js'%}"></script>
+{% endblock %}
