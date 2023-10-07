@@ -12,12 +12,7 @@ form = document.getElementById("myForm");
 
 
 
-passwordToggle.addEventListener('click', function () {
-    const type = PassField.getAttribute('type') === 'password' ? 'text' : 'password';
-    PassField.setAttribute('type', type);
-    this.classList.toggle('fa-eye-slash');
-    
-});
+
 
 UsernameField.addEventListener('keyup',(e)=>{
     usernameVal =e.target.value;
